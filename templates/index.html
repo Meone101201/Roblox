@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Glow Game</title>
+    <!-- ลิงก์ไปยังไฟล์ CSS ของเรา -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- นี่คือส่วนหลักที่ JavaScript จะใช้แสดงผล UI ของเกม -->
+    <div id="app-content">
+        <h1>Welcome to My Plant Game!</h1>
+        <p>Loading...</p>
+    </div>
+
+    <!-- ลิงก์ไปยังไฟล์ JavaScript ของเรา (สำคัญ: ต้องวางไว้ท้ายสุดของ body) -->
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>

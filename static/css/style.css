@@ -1,0 +1,658 @@
+body {
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+#app-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.auth-container {
+    max-width: 350px;
+    margin: auto;
+}
+
+.auth-form h2 {
+    margin-top: 0;
+}
+
+.auth-form input {
+    display: block;
+    width: 90%;
+    padding: 10px;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.auth-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 95%;
+}
+
+.auth-form button:hover {
+    background-color: #0056b3;
+}
+
+.auth-form p {
+    font-size: 0.9em;
+    margin-top: 1em;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    min-height: 1.2em;
+}
+
+.game-container {
+    width: 95vw;
+    max-width: 1200px;
+    height: 90vh;
+    background-color: #f9f9f9;
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #e9ecef;
+    border-bottom: 1px solid #ddd;
+}
+
+#user-info,
+#game-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.weather-bar {
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+#plots-container {
+    flex-grow: 1;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    overflow-y: auto;
+}
+
+.plot-area {
+    background-color: #8B4513;
+    border: 5px solid #654321;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.plot-area.locked {
+    background-color: #555;
+    border-color: #333;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.modal-body {
+    padding: 20px 0;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.close-modal-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.shop-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}
+
+.shop-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.shop-item h4 {
+    margin: 10px 0 5px 0;
+}
+
+.shop-item .price {
+    font-weight: bold;
+    color: #28a745;
+}
+
+.shop-item button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.plant-image {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.plot-button {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: 1px solid white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.fruit-image {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    z-index: 10;
+}
+
+.fruit-image:hover {
+    transform: scale(1.2);
+}
+
+.fruit-container {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+}
+
+.weather-icon {
+    position: absolute;
+    top: -5px;
+    right: -25px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 2px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 11;
+}
+
+.plot-button {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.8em;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    margin: 5px;
+}
+
+.plot-button:hover {
+    background-color: #fff;
+}
+
+.use-fertilizer-btn {
+    background-color: #28a745;
+    color: white;
+    border: 1px solid #1e7e34;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 20;
+}
+
+.use-fertilizer-btn:hover {
+    background-color: #218838;
+}
+
+.locked>span {
+    text-align: center;
+    line-height: 1.5;
+}
+
+.locked small {
+    display: block;
+    font-size: 0.7em;
+    font-weight: normal;
+}
+
+.plot-info {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 3px 6px;
+    border-radius: 3px;
+    font-size: 0.65em;
+    text-align: left;
+    z-index: 5;
+    pointer-events: none;
+    max-width: 120px;
+}
+
+.plot-info h4,
+.plot-info p {
+    margin: 0;
+    line-height: 1.2;
+}
+
+.plot-info h4 {
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.plot-info p {
+    font-size: 0.9em;
+}
+
+.shop-item .owned-count {
+    font-size: 0.9em;
+    color: #555;
+    margin: 5px 0;
+}
+
+#status-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.status-item {
+    font-weight: bold;
+}
+
+.status-item span {
+    font-weight: normal;
+    color: #007bff;
+}
+
+.plot-info .growth-countdown {
+    color: #a7d7f7;
+    font-size: 0.85em;
+}
+
+.item-description {
+    font-size: 0.85em;
+    color: #555;
+    margin: 8px 0;
+    min-height: 2.5em;
+    line-height: 1.4;
+}
+
+.plot-info .effect-countdown {
+    font-size: 0.8em;
+    margin-top: 2px;
+}
+
+.plot-info .effect-countdown.size-boost {
+    color: #f7de7c;
+}
+
+.plot-info .effect-countdown.color-boost {
+    color: #a092f7;
+}
+
+.plot-effects-container {
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.plot-info .effect-countdown {
+    font-size: 0.85em;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+.plot-info [data-effect-type="fruit_size_boost"] {
+    color: #f7de7c;
+}
+
+.plot-info [data-effect-type="fruit_color_boost"] {
+    color: #a092f7;
+}
+
+.plot-info [data-effect-type="dual_color_boost"] {
+    color: #82e0aa;
+}
+
+.plot-info [data-effect-type="tri_color_boost"] {
+    color: #f78da7;
+}
+
+.action-icon {
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+    vertical-align: middle;
+}
+
+.action-icon:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+#game-actions #logout-btn {
+    vertical-align: middle;
+}
+
+.modal-title-icon {
+    height: 24px;
+    width: 24px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.modal-header h2 {
+    display: flex;
+    align-items: center;
+}
+
+.fruit-container:hover .fruit-image {
+    filter: drop-shadow(0 0 8px rgba(255, 196, 0, 1));
+    transform: scale(1.15);
+}
+
+:root {
+    --auth-bg: #f8fbf8;
+    --primary-green: #2e7d32;
+    --primary-green-hover: #1b5e20;
+    --border-color: #c8e6c9;
+    --text-color-dark: #212121;
+    --text-color-light: #666;
+}
+
+.auth-container {
+    background-color: var(--auth-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    padding: 2.5rem;
+    width: 400px;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+}
+
+.auth-form h2 {
+    color: var(--text-color-dark);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 0 0 1rem 0;
+    border: 1px solid var(--border-color);
+    background-color: #fff;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+}
+
+.auth-form button {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: var(--primary-green);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.auth-form button:hover {
+    background-color: var(--primary-green-hover);
+    transform: translateY(-2px);
+}
+
+.auth-form p {
+    color: var(--text-color-light);
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.auth-form p a {
+    color: var(--primary-green);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.auth-form p a:hover {
+    color: var(--primary-green-hover);
+    text-decoration: underline;
+}
+
+.inventory-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+.inventory-actions button {
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#sell-selected-btn {
+    background-color: #28a745;
+    color: white;
+    border-color: #1e7e34;
+}
+
+#sell-all-btn {
+    background-color: #dc3545;
+    color: white;
+    border-color: #b21f2d;
+}
+
+#total-selected-value {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.inventory-fruit-item .price {
+    color: #007bff;
+}
+
+.fruit-select-label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+}
+
+.fruit-select-label img {
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.2s;
+}
+
+.fruit-select-checkbox {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 20px;
+    height: 20px;
+    z-index: 10;
+}
+
+.fruit-select-checkbox:checked+img {
+    transform: scale(1.1);
+    outline: 3px solid #007bff;
+    border-radius: 50%;
+    background-color: rgba(0, 123, 255, 0.2);
+}
+
+.inventory-weather-icon {
+    position: absolute !important;
+    top: 2px !important;
+    right: 2px !important;
+    width: 40px !important;
+    height: 40px !important;
+    background-color: white !important;
+    border-radius: 50% !important;
+    padding: 2px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+    z-index: 12 !important;
+}
+
+.fruit-select-checkbox {
+    top: 2px;
+    left: 2px;
+}
+
+.inventory-weather-text {
+    font-size: 0.8em;
+    font-style: italic;
+    color: #206a8f;
+    margin: 2px 0 6px 0;
+    min-height: 1.2em;
+    font-weight: bold;
+}
+
+.dig-up-plant-btn {
+    background-color: #dc3545;
+    color: white;
+    border: 1px solid #b21f2d;
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    z-index: 20;
+}
+
+.dig-up-plant-btn:hover {
+    background-color: #c82333;
+}
+
+.fruit-container.single-harvest-fruit {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform-origin: bottom center;
+    z-index: 10;
+}
+
+.fruit-container.single-harvest-fruit .fruit-image {
+    transition: transform 0.2s ease-in-out;
+}
+
+.fruit-container.single-harvest-fruit:hover .fruit-image {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 8px rgba(255, 196, 0, 1));
+}
+
+.fruit-container.single-harvest-fruit .fruit-image {
+    position: static;
+    display: block;
+    transform-origin: bottom center;
+}
+
+.plot-area.ready-to-harvest .dig-up-plant-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    right: auto;
+    z-index: 15;
+}
