@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         else if (target.closest('.close-modal-btn')) closeAllModals();
         else if (classList.contains('plant-seed-btn')) showPlantSeedModal(target.dataset.plotId);
-        else if (classList.contains('fruit-image')) handleHarvest(target.dataset.fruitId, target.closest('.fruit-container'));
+        else if (target.closest('.fruit-image')) handleHarvest(target.dataset.fruitId, target.closest('.fruit-container'));
     }
 
     function attachGameDashboardListeners() {
@@ -216,6 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const container = createFruitElement(fruit, plantInfo);
                     plotDiv.appendChild(container);
                     updateFruitElement(container, fruit, plantInfo);
+                    updateWeatherIcon(container, fruit);
                 });
 
                 if (plotDiv.querySelector('.use-fertilizer-btn')) plotDiv.querySelector('.use-fertilizer-btn').remove();
@@ -299,6 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     plotDiv.appendChild(container);
                 }
                 updateFruitElement(container, fruit, plantInfo);
+                updateWeatherIcon(container, fruit);
             });
             if (!plotDiv.querySelector('.use-fertilizer-btn')) {
                 plotDiv.appendChild(createButton('Use Fertilizer', 'plot-button use-fertilizer-btn', {
